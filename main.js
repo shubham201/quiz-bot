@@ -41,6 +41,7 @@ app.post("/start_bot", async function (req, res) {
     else if (app.locals.IsActive){
         console.log({"Quiz" : app.locals.poll});
         console.log({"answer" : message.text});
+        await tc.sendPoll(telegram_url, chatId, app.locals.poll, message.text, res);
         app.locals.poll = undefined; app.locals.IsActive = false;
         res.end();
     }

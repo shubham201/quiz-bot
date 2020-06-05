@@ -19,7 +19,9 @@ var lastMessageId, currentMessageId;
 app.post("/start_bot", async function (req, res) {
     const { message } = req.body;
     console.log('\nLast Message Id : ', lastMessageId);
-    currentMessageId = message.message_id;
+    if(message.message_id){
+        currentMessageId = message.message_id;
+    }
     console.log('\nCurrent Message Id : ', currentMessageId);
     console.log(message);
     var chatId = message.chat.id;

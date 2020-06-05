@@ -19,30 +19,27 @@ var lastMessageId, currentMessageId;
 app.post("/start_bot", async function (req, res) {
     const { message } = req.body;
     console.log('\nLast Message Id : ', lastMessageId);
-    if(message.message_id){
-        currentMessageId = message.message_id;
+    if (!message) {
+        res.end();
     }
+    currentMessageId = message.message_id;
     console.log('\nCurrent Message Id : ', currentMessageId);
     console.log(message);
     var chatId = message.chat.id;
     console.log(chatId);
     lastMessageId = currentMessageId;
 
-    // console.log("poll", app.locals.poll);
-    // console.log("IsActive", app.locals.IsActive);
-    if(message.poll){
-        app.locals.poll = message.poll;
-        // console.log("p", JSON.stringify(app.locals.poll));
-        app.locals.IsActive = await tc.ask_options(telegram_url, chatId, res);
-        // console.log("I", app.locals.IsActive);
-        res.end();
-    }
     if (message.text == undefined) {
-        res.end();
+        if (message.poll) {
+            app.locals.poll = message.poll;
+            app.locals.IsActive = await tc.ask_options(telegram_url, chatId, res);
+            res.end();
+        }
+        else {
+            res.end();
+        }
     }
-    else if (app.locals.IsActive){
-        // console.log({"Quiz" : app.locals.poll});
-        // console.log({"answer" : message.text});
+    else if (app.locals.IsActive) {
         await tc.sendPoll(telegram_url, chatId, app.locals.poll, message.text, res);
         app.locals.poll = undefined; app.locals.IsActive = false;
         res.end();

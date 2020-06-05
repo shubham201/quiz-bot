@@ -3,12 +3,13 @@ const axios = require("axios");
 module.exports = function (telegram_url, senderId, poll, answer, res) {
     console.log("id :", poll.id);
     console.log("question :", poll.question);
-    console.log("options :", poll.options);
+    var options = [poll.options[0].text, poll.options[1].text, poll.options[2].text, poll.options[3].text];
+    console.log("options :", options);
     return new Promise((resolve, reject) => {
         axios.post(telegram_url + "/sendPoll", {
             chat_id: senderId,
             question: poll.question,
-            options: poll.options,
+            options: options,
             is_anonymous: poll.is_anonymous,
             is_closed: poll.is_closed,
             type: poll.type,

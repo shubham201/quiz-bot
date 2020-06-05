@@ -26,11 +26,11 @@ app.post("/start_bot", async function (req, res) {
     console.log(chatId);
     lastMessageId = currentMessageId;
     
+    if(message.poll){
+        console.log(JSON.stringify(message.poll.options));
+    }
     if (message.text == undefined) {
         res.end();
-    }
-    else if(message.poll){
-        console.log(JSON.stringify(message.poll.options));
     }
     else if (message.text.toLowerCase().substr(0, 13).startsWith('/timeout_test')) {
         await tc.timeout_test(message, res);

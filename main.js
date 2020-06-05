@@ -17,14 +17,14 @@ app.get("/", (req, res) => {
 var lastMessageId, currentMessageId;
 
 app.post("/start_bot", async function (req, res) {
-    const { message } = req.body;
-    console.log('\nLast Message Id : ', lastMessageId);
-    if (!message) {
+    if(!req.body){
         res.end();
     }
+    const { message } = req.body;
+    console.log("message :", message);
+    console.log('\nLast Message Id : ', lastMessageId);
     currentMessageId = message.message_id;
     console.log('\nCurrent Message Id : ', currentMessageId);
-    console.log(message);
     var chatId = message.chat.id;
     console.log(chatId);
     lastMessageId = currentMessageId;

@@ -23,6 +23,7 @@ app.post("/start_bot", async function (req, res) {
     console.log(message);
     var chatId = message.chat.id;
     console.log(chatId);
+    console.log(JSON.stringify(message.poll.options));
     if (message.text == undefined) {
         res.end();
     }

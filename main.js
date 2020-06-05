@@ -17,9 +17,9 @@ app.get("/", (req, res) => {
 var lastMessageId, currentMessageId;
 
 app.post("/start_bot", async function (req, res) {
-    console.log("Body :", req.body);
-    if (req.body) {
-        const { message } = req.body;
+    // console.log("Body :", req.body);
+    const { message } = req.body;
+    if (message) {
         console.log("Message :", message);
         console.log('\nLast Message Id : ', lastMessageId);
         currentMessageId = message.message_id;

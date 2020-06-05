@@ -21,12 +21,12 @@ app.post("/start_bot", async function (req, res) {
     const { message } = req.body;
     if (message) {
         console.log("Message :", message);
-        console.log('\nLast Message Id : ', lastMessageId);
-        currentMessageId = message.message_id;
-        console.log('\nCurrent Message Id : ', currentMessageId);
+        // console.log('\nLast Message Id : ', lastMessageId);
+        // currentMessageId = message.message_id;
+        // console.log('\nCurrent Message Id : ', currentMessageId);
         var chatId = message.chat.id;
         console.log(chatId);
-        lastMessageId = currentMessageId;
+        // lastMessageId = currentMessageId;
         if (message.text == undefined) {
             if (message.poll) {
                 app.locals.poll = message.poll;

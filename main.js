@@ -22,7 +22,7 @@ app.post("/start_bot", async function (req, res) {
         console.log("Message :", message);
         // console.log('\nLast Message Id : ', lastMessageId);
         // currentMessageId = message.message_id;
-        if ((1 || app.locals.message_id) < message.message_id) {
+        if ((app.locals.message_id || 1) < message.message_id) {
             app.locals.message_id = message.message_id;
         }
         // console.log('\nCurrent Message Id : ', currentMessageId);

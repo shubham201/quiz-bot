@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "main.js",
+            "use": "@now/node-server"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/main.js",
+            "methods": [
+                "GET"
+            ]
+        },
+        {
+            "src": "/start_bot",
+            "dest": "/main.js",
+            "methods": [
+                "POST"
+            ]
+        }
+    ]
+}

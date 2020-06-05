@@ -26,21 +26,21 @@ app.post("/start_bot", async function (req, res) {
     console.log(chatId);
     lastMessageId = currentMessageId;
 
-    console.log("poll", app.locals.poll);
-    console.log("IsActive", app.locals.IsActive);
+    // console.log("poll", app.locals.poll);
+    // console.log("IsActive", app.locals.IsActive);
     if(message.poll){
         app.locals.poll = message.poll;
-        console.log("p", JSON.stringify(app.locals.poll));
+        // console.log("p", JSON.stringify(app.locals.poll));
         app.locals.IsActive = await tc.ask_options(telegram_url, chatId, res);
-        console.log("I", app.locals.IsActive);
+        // console.log("I", app.locals.IsActive);
         res.end();
     }
     if (message.text == undefined) {
         res.end();
     }
     else if (app.locals.IsActive){
-        console.log({"Quiz" : app.locals.poll});
-        console.log({"answer" : message.text});
+        // console.log({"Quiz" : app.locals.poll});
+        // console.log({"answer" : message.text});
         await tc.sendPoll(telegram_url, chatId, app.locals.poll, message.text, res);
         app.locals.poll = undefined; app.locals.IsActive = false;
         res.end();

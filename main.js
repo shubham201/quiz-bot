@@ -17,17 +17,19 @@ app.get("/", (req, res) => {
 var lastMessageId, currentMessageId;
 
 app.post("/start_bot", async function (req, res) {
-    // console.log("Body :", req.body);
     const { message } = req.body;
     if (message) {
         console.log("Message :", message);
         // console.log('\nLast Message Id : ', lastMessageId);
         // currentMessageId = message.message_id;
+        if (app.locals.message_id < message.message_id) {
+            app.locals.message_id = message.message_id;
+        }
         // console.log('\nCurrent Message Id : ', currentMessageId);
         var chatId = message.chat.id;
         console.log(chatId);
         // lastMessageId = currentMessageId;
-        if (message.text == undefined) {
+        if (message.text == undefined || app.locals.message_id > message.message_id) {
             if (message.poll) {
                 app.locals.poll = message.poll;
                 app.locals.IsActive = await tc.ask_options(telegram_url, chatId, res);

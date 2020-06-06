@@ -10,7 +10,7 @@ module.exports = function (telegram_url, senderId, poll, answer, res) {
             chat_id: senderId,
             question: poll.question,
             options: options,
-            is_anonymous: poll.is_anonymous,
+            is_anonymous: false,
             is_closed: poll.is_closed,
             type: poll.type,
             allows_multiple_answers: poll.allows_multiple_answers,

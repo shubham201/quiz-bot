@@ -14,7 +14,7 @@ module.exports = function (telegram_url, senderId, poll, answer, res) {
             is_closed: poll.is_closed,
             type: poll.type,
             allows_multiple_answers: poll.allows_multiple_answers,
-            correct_option_id: answer - '1'
+            correct_option_id: answer
         }).then(resp => {
             res.send();
             res.end();

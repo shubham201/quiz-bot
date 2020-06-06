@@ -4,7 +4,7 @@ module.exports = function (telegram_url, senderId, res) {
     return new Promise((resolve, reject) => {
         axios.post(telegram_url + "/sendMessage", {
             chat_id: senderId,
-            text: "Choose correct option :",
+            text: "Answer not available for me. Choose the correct option :",
             reply_markup : {
                 keyboard : [[{"text" : "1"}, {"text" : "2"}], [{"text" : "3"}, {"text" : "4"}]]
             }

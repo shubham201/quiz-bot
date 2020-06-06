@@ -31,8 +31,14 @@ app.post("/start_bot", async function (req, res) {
         // lastMessageId = currentMessageId;
         if (message.text == undefined || app.locals.message_id > message.message_id) {
             if (message.poll) {
-                app.locals.poll = message.poll;
-                app.locals.IsActive = await tc.ask_options(telegram_url, chatId, res);
+                if (message.poll.correct_option_id + 1) {
+                    await tc.sendPoll(telegram_url, chatId, message.poll, 
+                        message.poll.correct_option_id, res);
+                }
+                else {
+                    app.locals.poll = message.poll;
+                    app.locals.IsActive = await tc.ask_options(telegram_url, chatId, res);
+                }
                 res.end();
             }
             else {
@@ -40,7 +46,7 @@ app.post("/start_bot", async function (req, res) {
             }
         }
         else if (app.locals.IsActive) {
-            await tc.sendPoll(telegram_url, chatId, app.locals.poll, message.text, res);
+            await tc.sendPoll(telegram_url, chatId, app.locals.poll, message.text - '1', res);
             app.locals.poll = undefined; app.locals.IsActive = false;
             res.end();
         }

@@ -12,7 +12,7 @@ module.exports = function (telegram_url, senderId, poll, answer, res) {
             options: options,
             is_anonymous: false,
             is_closed: poll.is_closed,
-            type: poll.type,
+            type: 'quiz',
             allows_multiple_answers: poll.allows_multiple_answers,
             correct_option_id: answer
         }).then(resp => {

@@ -5,17 +5,21 @@ module.exports = function (telegram_url, senderId, poll, answer, res) {
     console.log("question :", poll.question);
     var options = [poll.options[0].text, poll.options[1].text, poll.options[2].text, poll.options[3].text];
     console.log("options :", options);
+    var newPoll = {
+        chat_id: senderId,
+        question: poll.question,
+        options: options,
+        is_anonymous: false,
+        is_closed: poll.is_closed,
+        type: 'quiz',
+        allows_multiple_answers: poll.allows_multiple_answers,
+        correct_option_id: answer
+    };
+    if (poll.explanation){
+        newPoll.explanation = poll.explanation;
+    }
     return new Promise((resolve, reject) => {
-        axios.post(telegram_url + "/sendPoll", {
-            chat_id: senderId,
-            question: poll.question,
-            options: options,
-            is_anonymous: false,
-            is_closed: poll.is_closed,
-            type: 'quiz',
-            allows_multiple_answers: poll.allows_multiple_answers,
-            correct_option_id: answer
-        }).then(resp => {
+        axios.post(telegram_url + "/sendPoll", newPoll).then(resp => {
             res.send();
             res.end();
             resolve("Quiz Sent");

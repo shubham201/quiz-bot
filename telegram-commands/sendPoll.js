@@ -10,7 +10,7 @@ module.exports = function (telegram_url, senderId, poll, answer, res) {
         question: poll.question,
         options: options,
         is_anonymous: false,
-        is_closed: poll.is_closed,
+        is_closed: false,
         type: 'quiz',
         allows_multiple_answers: poll.allows_multiple_answers,
         correct_option_id: answer

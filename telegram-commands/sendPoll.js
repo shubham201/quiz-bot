@@ -3,7 +3,10 @@ const axios = require("axios");
 module.exports = function (telegram_url, senderId, poll, answer, res) {
     console.log("id :", poll.id);
     console.log("question :", poll.question);
-    var options = [poll.options[0].text, poll.options[1].text, poll.options[2].text, poll.options[3].text];
+    var options = [];
+    for (let i = 0; i < poll.options.length; i++) {
+        options.push(poll.options[i].text);
+    }
     console.log("options :", options);
     var newPoll = {
         chat_id: senderId,

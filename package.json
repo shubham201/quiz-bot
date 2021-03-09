@@ -8,7 +8,7 @@
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "dev": "now dev"
+    "dev": "vercel dev --token fOz214y6ueoSq133oAyLlWWw"
   },
   "author": "shubhambharti201",
   "license": "MIT",

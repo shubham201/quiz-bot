@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "f4108594-229c-4aa3-bdeb-96c4a1a04601",
+		"name": "quiz_bot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/start_bot",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\" : {\r\n        \"chat\" :{\r\n            \"id\" : 979085044\r\n        },\r\n        \"text\" : \"/start\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/start_bot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"start_bot"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

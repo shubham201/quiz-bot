@@ -32,7 +32,7 @@ app.post("/start_bot", async function (req, res) {
         if (message.text == undefined || app.locals.message_id > message.message_id) {
             if (message.poll) {
                 if (message.poll.correct_option_id + 1) {
-                    await tc.sendPoll(telegram_url, chatId, message.poll, 
+                    await tc.sendPoll(telegram_url, chatId, message.poll,
                         message.poll.correct_option_id, res);
                 }
                 else {
@@ -57,6 +57,9 @@ app.post("/start_bot", async function (req, res) {
             await tc.start(telegram_url, chatId, config.WELCOME, res);
         }
         else if (message.text.toLowerCase().substr(0, 1) == '/') {
+            await tc.fallback(telegram_url, chatId, res);
+        }
+        else {
             await tc.fallback(telegram_url, chatId, res);
         }
     }

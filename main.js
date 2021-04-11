@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require("body-parser");
 const config = require('./config/config.js');
 const tc = require('./telegram-commands/tc-loader');
+const sendMessage = require('./src/sendMessage');
 
 let telegram_url = "https://api.telegram.org/bot" + config.TELEGRAM_API_TOKEN;
 
@@ -60,7 +61,9 @@ app.post("/start_bot", async function (req, res) {
             await tc.fallback(telegram_url, chatId, res);
         }
         else {
-            await tc.fallback(telegram_url, chatId, res);
+            await sendMessage(telegram_url, chatId, message.text);
+            res.send(message.text);
+            res.end();
         }
     }
     else {
